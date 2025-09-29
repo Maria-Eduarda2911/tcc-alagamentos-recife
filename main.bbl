@@ -1,0 +1,35 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.7 }
+
+\bibitem[ALVES]{alves_apac}
+\abntrefinfo{ALVES}{ALVES}{}
+{ALVES, A. \emph{APAC - Agência Pernambucana de Águas e Climas - Início}.
+  \url{https://www.apac.pe.gov.br/}.
+Acesso em: 29 set. 2025.}
+
+\bibitem[BARROS e SILVA 2025]{carvalho2025sistema}
+\abntrefinfo{BARROS e SILVA}{BARROS; SILVA}{2025}
+{BARROS, B. C.~D.; SILVA, H. P.~D. \emph{Sistema de informações geográficas
+  e sensoriamento remoto visando modelagem de inundações e alagamentos em
+  Recife, Pernambuco}. 2025.
+  \url{https://repositorio.ifpe.edu.br/xmlui/bitstream/handle/123456789/1696/Sistema%20de%20informa%c3%a7%c3%b5es%20geogr%c3%a1ficas%20e%20sensoriamento%20remoto%20visando%20modelagem%20de%20inunda%c3%a7%c3%b5es%20e%20alagamentos%20em%20Recife%2c%20Pernambuco.pdf?sequence=1&isAllowed=y}.
+Acesso em: 29 set. 2025.}
+
+\bibitem[DOMINGOS et al. 2025]{domingos2025mapeamento}
+\abntrefinfo{DOMINGOS et al.}{DOMINGOS et al.}{2025}
+{DOMINGOS, L. et al. Mapeamento de áreas suscetíveis a inundações na cidade
+  do recife-pe/brasil.
+\emph{Espaço em Revista}, v.~27, n.~1, p. 21--44, jul. 2025.}
+
+\bibitem[WILSON et al. 2016]{wilson2016analise}
+\abntrefinfo{WILSON et al.}{WILSON et al.}{2016}
+{WILSON, D. et al. Análise da relação entre a intensidade da chuva e
+  ocorrências de alagamentos nos meses de abril e maio de 2016 na cidade do
+  recife, pernambuco.
+\emph{Paisagens \& Geografias}, v.~3, n. Esp 2, 2016.}
+
+\end{thebibliography}

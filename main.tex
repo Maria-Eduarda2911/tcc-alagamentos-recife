@@ -1,0 +1,109 @@
+\documentclass[12pt, a4paper, oneside]{abntex2}
+
+% -----------------------------------------------------------------------------
+% PACOTES DE FONTES E TIPOGRAFIA (ABNT pede Times ou Arial)
+% -----------------------------------------------------------------------------
+\usepackage[T1]{fontenc}        % Codificação da fonte
+\usepackage[utf8]{inputenc}     % Codificação do arquivo
+\usepackage{times}              % Fonte Times New Roman
+\usepackage{microtype}          % Melhora a justificação e microtipografia
+
+% -----------------------------------------------------------------------------
+% AJUSTES DE TÍTULOS (sem negrito, todos em Times)
+% -----------------------------------------------------------------------------
+\renewcommand{\ABNTEXchapterfont}{\normalfont\normalsize}      
+\renewcommand{\ABNTEXsectionfont}{\normalfont\normalsize}      
+\renewcommand{\ABNTEXsubsectionfont}{\normalfont\normalsize}   
+
+% -----------------------------------------------------------------------------
+% AJUSTES DE CITAÇÕES (fonte 10pt, espaçamento simples)
+% -----------------------------------------------------------------------------
+\renewenvironment{citacao}%
+  {\begin{list}{}{\leftmargin=4cm\rightmargin=2cm}%
+   \item[]\footnotesize\singlespacing}%
+  {\end{list}}
+
+% -----------------------------------------------------------------------------
+% CARREGA O PREÂMBULO (configurações gerais do trabalho)
+% -----------------------------------------------------------------------------
+\input{preambulo}
+
+\begin{document}
+
+% -----------------------------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% -----------------------------------------------------------------------------
+\input{elementos-pre-textuais/capa}
+\cleardoublepage
+
+\input{elementos-pre-textuais/folha-rosto}
+\cleardoublepage
+
+\input{elementos-pre-textuais/folha-aprovacao}
+\cleardoublepage
+
+\input{elementos-pre-textuais/dedicatoria}
+\cleardoublepage
+
+\input{elementos-pre-textuais/agradecimentos}
+\cleardoublepage
+
+% \input{elementos-pre-textuais/epigrafe} % opcional
+% \cleardoublepage
+
+\input{elementos-pre-textuais/resumo}
+\cleardoublepage
+
+\input{elementos-pre-textuais/abstract}
+\cleardoublepage
+
+\input{elementos-pre-textuais/listas}
+\cleardoublepage
+
+% -----------------------------------------------------------------------------
+% SUMÁRIO
+% -----------------------------------------------------------------------------
+\pdfbookmark[0]{\contentsname}{toc}
+\setcounter{tocdepth}{2} % capítulos, seções e subseções
+\tableofcontents*
+\cleardoublepage
+
+% -----------------------------------------------------------------------------
+% CORPO TEXTUAL
+% -----------------------------------------------------------------------------
+\textual
+
+\input{capitulos/1-introducao}
+\cleardoublepage
+
+\input{capitulos/2-referencial}
+\cleardoublepage
+
+\input{capitulos/3-metodologia}
+\cleardoublepage
+
+\input{capitulos/4-desenvolvimento}
+\cleardoublepage
+
+\input{capitulos/5-resultados}
+\cleardoublepage
+
+\input{capitulos/6-conclusao}
+\cleardoublepage
+
+% -----------------------------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% -----------------------------------------------------------------------------
+\postextual
+
+\input{elementos-pos-textuais/apendices}
+\cleardoublepage
+
+% \input{elementos-pos-textuais/anexos} % se houver
+% \cleardoublepage
+
+\bibliographystyle{abntex2-alf}
+\bibliography{elementos-pos-textuais/referencias}
+\cleardoublepage
+
+\end{document}

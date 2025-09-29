@@ -1,0 +1,137 @@
+% apendices.tex --- Apêndices do TCC
+\begin{apendicesenv}
+
+\chapter{Manual de Instalação do Sistema}
+
+\section{Pré-requisitos}
+\begin{itemize}
+    \item Python 3.8 ou superior
+    \item pip (gerenciador de pacotes Python)
+    \item Git
+\end{itemize}
+
+\section{Instalação}
+\begin{enumerate}
+    \item Clone o repositório:
+    \begin{lstlisting}
+git clone https://github.com/Maria-Eduarda2911/projeto-tcc.git
+    \end{lstlisting}
+
+    \item Acesse a pasta do projeto e instale as dependências:
+    \begin{lstlisting}
+cd projeto-tcc
+pip install -r requirements.txt
+    \end{lstlisting}
+
+    \item Execute o servidor de desenvolvimento:
+    \begin{lstlisting}
+python -m uvicorn app.main:app --reload
+    \end{lstlisting}
+\end{enumerate}
+
+\chapter{Código Fonte do Algoritmo Principal}
+
+\begin{lstlisting}[
+  caption={Algoritmo Completo de Previsao},
+  label={lst:algoritmo-completo},
+  language=Python
+]
+from services.data_processor import DataProcessor
+
+class FloodPredictor:
+    def calcular_risco_area(self, area: dict, dados_apac: dict) -> dict:
+        processor = DataProcessor()
+        estacoes = dados_apac.get('estacoes', []) if dados_apac else []
+
+        print(f"Analisando area: {area['nome']}")
+
+        estacao_proxima = processor.encontrar_estacao_proxima(area, estacoes)
+
+        if estacao_proxima:
+            dados_chuva = processor.extract_rain_data(estacao_proxima)
+            print(f"Dados ATUAIS: {dados_chuva['chuva_mm']} mm de chuva")
+
+            risco_atual = self._calcular_risco_dinamico(dados_chuva)
+            risco_final = (risco_atual * 0.8) + (area['risco_base'] * 0.2)
+
+            print(f"Risco calculado com dados ATUAIS: {risco_final:.3f}")
+        else:
+            print("Sem dados atuais, usando historico")
+            risco_final = area['risco_base'] * 0.7
+
+        return self._classificar_risco(risco_final)
+
+    def _calcular_risco_dinamico(self, dados_chuva: dict) -> float:
+        chuva = dados_chuva['chuva_mm']
+        prob_chuva = dados_chuva['prob_chuva'] / 100.0
+        acumulado = dados_chuva['acumulado_24h']
+
+        fator_chuva = self._normalizar_chuva(chuva)
+        fator_acumulado = self._normalizar_acumulado(acumulado)
+        fator_probabilidade = prob_chuva
+
+        risco = (fator_chuva * 0.5) + (fator_acumulado * 0.3) + (fator_probabilidade * 0.2)
+        return min(risco, 1.0)
+
+    def _normalizar_chuva(self, chuva_mm: float) -> float:
+        if chuva_mm <= 5:
+            return 0.1
+        elif chuva_mm <= 15:
+            return 0.3
+        elif chuva_mm <= 30:
+            return 0.6
+        elif chuva_mm <= 50:
+            return 0.8
+        else:
+            return 1.0
+
+    def _normalizar_acumulado(self, acumulado_mm: float) -> float:
+        if acumulado_mm <= 20:
+            return 0.2
+        elif acumulado_mm <= 40:
+            return 0.4
+        elif acumulado_mm <= 60:
+            return 0.6
+        elif acumulado_mm <= 80:
+            return 0.8
+        else:
+            return 1.0
+
+    def _classificar_risco(self, risco: float) -> dict:
+        if risco >= 0.7:
+            return {
+                "score": round(risco, 3),
+                "nivel": "ALTO",
+                "cor": "#ff4444",
+                "probabilidade": "Alta probabilidade de alagamento"
+            }
+        elif risco >= 0.4:
+            return {
+                "score": round(risco, 3),
+                "nivel": "MODERADO",
+                "cor": "#ffaa00",
+                "probabilidade": "Risco moderado de alagamento"
+            }
+        else:
+            return {
+                "score": round(risco, 3),
+                "nivel": "BAIXO",
+                "cor": "#44ff44",
+                "probabilidade": "Baixo risco de alagamento"
+            }
+
+  def determinar_alerta_geral(self, areas: list) -> str:
+    riscos = [area["risco"] for area in areas]
+    risco_medio = sum(riscos) / len(riscos)
+
+    if risco_medio == 2:
+        return "ALERTA VERMELHA --- Multiplas áreas em alerta"
+    elif risco_medio == 1:
+        return "ALERTA AMARELA --- Algumas áreas em alerta"
+    else:
+        return "SITUACAO NORMAL - Risco baixo na maioria das áreas"
+
+\end{lstlisting}
+
+\end{apendicesenv}
+% -----------------------------------------------------------------------------
